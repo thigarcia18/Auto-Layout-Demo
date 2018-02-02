@@ -93,7 +93,7 @@ class ViewController: UIViewController {
     
     private func setupLayout() {
         let topImageContainerView = UIView()
-        //topImageContainerView.backgroundColor = .blue
+
         view.addSubview(topImageContainerView)
         topImageContainerView.translatesAutoresizingMaskIntoConstraints = false
         
