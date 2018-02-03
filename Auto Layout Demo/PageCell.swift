@@ -9,15 +9,33 @@
 import UIKit
 
 class PageCell: UICollectionViewCell {
+    
+    var page: Page? {
+        didSet {
+            
+            guard let unwrappedPage = page else { return }
+            
+            bearImageView.image = UIImage(named: unwrappedPage.imageName)
+            
+            let attributedText = NSMutableAttributedString(string: unwrappedPage.headerText, attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18)])
+            attributedText.append(NSAttributedString(string: "\n\n\n\(unwrappedPage.bodyText)", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13), NSAttributedStringKey.foregroundColor: UIColor.gray]))
+            descriptionTextView.attributedText = attributedText
+            descriptionTextView.textAlignment = .center
+            descriptionTextView.isEditable = false
+            descriptionTextView.isScrollEnabled = false
+            descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
+            
+        }
+    }
    
-    let bearImageView: UIImageView = {
+    private let bearImageView: UIImageView = {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "bear_first"))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
-    let descriptionTextView: UITextView = {
+   private let descriptionTextView: UITextView = {
         let textView = UITextView()
         let attributedText = NSMutableAttributedString(string: "Join us today in our fun and games!", attributes: [NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18)])
         attributedText.append(NSAttributedString(string: "\n\n\nAre you ready for loads ans loads of fun? \nDon't wait any longer! We hope to see you in our stores soon.", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13), NSAttributedStringKey.foregroundColor: UIColor.gray]))
